@@ -4,6 +4,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <sapi/tpm20.h>
 #include "GenericDataStructure.h"
 
 struct DataBuffer {
@@ -17,12 +18,12 @@ GenericDataStructure::GenericDataStructure()
     pData = &DefaultDataBuffer;
 }
 
-size_t GenericDataStructure::getBufferSize()
+size_t GenericDataStructure::getBufferSize() const
 {
     return (size_t) pData->max;
 }
 
-const void* GenericDataStructure::getBuffer()
+const void* GenericDataStructure::getBuffer() const
 {
     return (const void *) (pData->buffer);
 }
@@ -55,4 +56,9 @@ Data::~Data()
 {
     uint8_t *p = (uint8_t *) ((void *) pData);
     delete[] p;
+}
+
+TPM2B_DATA *Unpack(const Data& obj)
+{
+    return (TPM2B_DATA *) obj.getBuffer();
 }
