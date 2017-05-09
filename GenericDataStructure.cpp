@@ -40,7 +40,7 @@ GenericDataStructure::~GenericDataStructure()
 
 Data::Data(size_t max)
 {
-    if (max > (uint8_t) 0xFFFF) {
+    if (max > (uint16_t) 0xFFFF) {
         max = 0xFFFF; // 限制缓冲区预留空间最大值为 65535 字节
     } else if (0 == max) {
         // 这里允许创建空数据块
