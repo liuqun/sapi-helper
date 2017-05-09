@@ -46,8 +46,7 @@ Data::Data(size_t max)
         // 这里允许创建空数据块
     }
 
-    size_t nBytes = sizeof(uint16_t) + max;
-    uint8_t *p = new uint8_t[nBytes];
+    int *p = new int[(sizeof(uint16_t) + max + sizeof(int) - 1) / sizeof(int)]; // 32 位主机内存块对齐 4 字节地址, 64 主机对齐 8 字节地址
     pData = (struct DataBuffer *) p;
     pData->max = max;
 }
